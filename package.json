@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/mmert9008/typescriptPokedex#readme",
   "devDependencies": {
-    "@types/node": "^24.8.1",
+    "@types/node": "^24.9.0",
     "typescript": "^5.9.3",
     "vite": "^7.1.11",
     "vitest": "^3.2.4"
