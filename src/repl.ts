@@ -1,10 +1,14 @@
 import * as readline from "readline";
+import { getCommands } from "./commands.js";
 
 export function cleanInput(input: string): string[] {
   return input.trim().toLowerCase().split(/\s+/);
 }
 
 export function startREPL(): void {
+  // Get the command registry
+  const commands = getCommands();
+
   // Create the readline interface
   const rl = readline.createInterface({
     input: process.stdin,
@@ -26,8 +30,23 @@ export function startREPL(): void {
       return;
     }
 
-    // Print the first word back to the user
-    console.log(`Your command was: ${words[0]}`);
+    // Get the command name (first word)
+    const commandName = words[0];
+
+    // Look up the command in the registry
+    const command = commands[commandName];
+
+    if (command) {
+      // If command exists, call its callback
+      try {
+        command.callback(commands);
+      } catch (error) {
+        console.error(`Error executing command: ${error}`);
+      }
+    } else {
+      // If command doesn't exist, print error message
+      console.log("Unknown command");
+    }
 
     // Give the user back control to type another command
     rl.prompt();
