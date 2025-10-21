@@ -1,54 +1,43 @@
-import * as readline from "readline";
-import { getCommands } from "./commands.js";
+import type { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
-  return input.trim().toLowerCase().split(/\s+/);
+	return input.trim().toLowerCase().split(/\s+/);
 }
 
-export function startREPL(): void {
-  // Get the command registry
-  const commands = getCommands();
+export function startREPL(state: State): void {
+	// Display the initial prompt
+	state.rl.prompt();
 
-  // Create the readline interface
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "> ",
-  });
+	// Listen for line input
+	state.rl.on("line", (input: string) => {
+		// Parse the input into an array of words
+		const words = cleanInput(input);
 
-  // Display the initial prompt
-  rl.prompt();
+		// If input is empty, prompt again and exit callback
+		if (words.length === 0 || words[0] === "") {
+			state.rl.prompt();
+			return;
+		}
 
-  // Listen for line input
-  rl.on("line", (input: string) => {
-    // Parse the input into an array of words
-    const words = cleanInput(input);
+		// Get the command name (first word)
+		const commandName = words[0];
 
-    // If input is empty, prompt again and exit callback
-    if (words.length === 0 || words[0] === "") {
-      rl.prompt();
-      return;
-    }
+		// Look up the command in the registry
+		const command = state.commands[commandName];
 
-    // Get the command name (first word)
-    const commandName = words[0];
+		if (command) {
+			// If command exists, call its callback
+			try {
+				command.callback(state);
+			} catch (error) {
+				console.error(`Error executing command: ${error}`);
+			}
+		} else {
+			// If command doesn't exist, print error message
+			console.log("Unknown command");
+		}
 
-    // Look up the command in the registry
-    const command = commands[commandName];
-
-    if (command) {
-      // If command exists, call its callback
-      try {
-        command.callback(commands);
-      } catch (error) {
-        console.error(`Error executing command: ${error}`);
-      }
-    } else {
-      // If command doesn't exist, print error message
-      console.log("Unknown command");
-    }
-
-    // Give the user back control to type another command
-    rl.prompt();
-  });
+		// Give the user back control to type another command
+		state.rl.prompt();
+	});
 }

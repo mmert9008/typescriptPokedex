@@ -1,4 +1,7 @@
-export function commandExit(): void {
-  console.log("Closing the Pokedex... Goodbye!");
-  process.exit(0);
+import type { State } from "./state.js";
+
+export function commandExit(state: State): void {
+	console.log("Closing the Pokedex... Goodbye!");
+	state.rl.close();
+	process.exit(0);
 }
