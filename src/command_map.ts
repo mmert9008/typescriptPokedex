@@ -1,6 +1,12 @@
 import type { State } from "./state.js";
 
 export async function commandMap(state: State): Promise<void> {
+	// Check if we're on the last page
+	if (!state.nextLocationsURL && state.prevLocationsURL) {
+		console.log("you're on the last page");
+		return;
+	}
+
 	const locationsData = await state.pokeapi.fetchLocations(
 		state.nextLocationsURL,
 	);
