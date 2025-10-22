@@ -9,7 +9,7 @@ export function startREPL(state: State): void {
 	state.rl.prompt();
 
 	// Listen for line input
-	state.rl.on("line", (input: string) => {
+	state.rl.on("line", async (input: string) => {
 		// Parse the input into an array of words
 		const words = cleanInput(input);
 
@@ -28,7 +28,7 @@ export function startREPL(state: State): void {
 		if (command) {
 			// If command exists, call its callback
 			try {
-				command.callback(state);
+				await command.callback(state);
 			} catch (error) {
 				console.error(`Error executing command: ${error}`);
 			}
