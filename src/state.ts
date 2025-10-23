@@ -4,6 +4,7 @@ import { commandHelp } from "./command_help.js";
 import { commandMap } from "./command_map.js";
 import { commandMapb } from "./command_mapb.js";
 import { PokeAPI } from "./pokeapi.js";
+import { Cache } from "./pokecache.js";
 
 export type CLICommand = {
 	name: string;
@@ -15,6 +16,7 @@ export type State = {
 	rl: Interface;
 	commands: Record<string, CLICommand>;
 	pokeapi: PokeAPI;
+	cache: Cache;
 	nextLocationsURL: string | undefined;
 	prevLocationsURL: string | undefined;
 };
@@ -26,6 +28,9 @@ export function initState(): State {
 		output: process.stdout,
 		prompt: "> ",
 	});
+
+	// Create cache with 5 minute interval (300000 ms)
+	const cache = new Cache(300000);
 
 	// Create the commands registry
 	const commands: Record<string, CLICommand> = {
@@ -54,7 +59,8 @@ export function initState(): State {
 	return {
 		rl,
 		commands,
-		pokeapi: new PokeAPI(),
+		pokeapi: new PokeAPI(cache),
+		cache,
 		nextLocationsURL: undefined,
 		prevLocationsURL: undefined,
 	};
