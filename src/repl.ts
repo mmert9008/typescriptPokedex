@@ -22,13 +22,16 @@ export function startREPL(state: State): void {
 		// Get the command name (first word)
 		const commandName = words[0];
 
+		// Get any additional arguments (remaining words)
+		const args = words.slice(1);
+
 		// Look up the command in the registry
 		const command = state.commands[commandName];
 
 		if (command) {
-			// If command exists, call its callback
+			// If command exists, call its callback with state and args
 			try {
-				await command.callback(state);
+				await command.callback(state, ...args);
 			} catch (error) {
 				console.error(`Error executing command: ${error}`);
 			}
