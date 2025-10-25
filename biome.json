@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
   "linter": {
     "enabled": true,
     "rules": {
@@ -61,7 +61,8 @@
   },
   "css": {
     "parser": {
-      "cssModules": true
+      "cssModules": true,
+      "tailwindDirectives": true
     },
     "formatter": {
       "enabled": true,
@@ -78,13 +79,23 @@
     }
   },
   "html": {
+    "parser": {
+      "interpolation": true
+    },
     "formatter": {
       "enabled": true,
       "indentStyle": "space",
       "indentWidth": 2,
       "lineEnding": "lf",
       "lineWidth": 80,
-      "selfCloseVoidElements": "always"
+      "selfCloseVoidElements": "always",
+      "indentScriptAndStyle": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "assist": {
+      "enabled": true
     }
   }
 }
