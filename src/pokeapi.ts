@@ -11,15 +11,13 @@ export class PokeAPI {
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     const url = pageURL || `${PokeAPI.baseURL}/location-area`;
 
-    // Check if we have cached data
     const cached = this.#cache.get<ShallowLocations>(url);
     if (cached) {
-      console.log("Using cached data");
+      // console.log("Using cached data");
       return cached;
     }
 
-    // Make the network request
-    console.log("Fetching from API...");
+    // console.log("Fetching from API...");
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -29,7 +27,6 @@ export class PokeAPI {
     const data = await response.json();
     const locations = data as ShallowLocations;
 
-    // Add to cache
     this.#cache.add(url, locations);
 
     return locations;
@@ -38,15 +35,13 @@ export class PokeAPI {
   async fetchLocation(locationName: string): Promise<Location> {
     const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
 
-    // Check if we have cached data
     const cached = this.#cache.get<Location>(url);
     if (cached) {
-      console.log("Using cached data");
+      // console.log("Using cached data");
       return cached;
     }
 
-    // Make the network request
-    console.log("Fetching from API...");
+    // console.log("Fetching from API...");
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -56,7 +51,6 @@ export class PokeAPI {
     const data = await response.json();
     const location = data as Location;
 
-    // Add to cache
     this.#cache.add(url, location);
 
     return location;
@@ -65,15 +59,13 @@ export class PokeAPI {
   async fetchPokemon(pokemonName: string): Promise<Pokemon> {
     const url = `${PokeAPI.baseURL}/pokemon/${pokemonName}`;
 
-    // Check if we have cached data
     const cached = this.#cache.get<Pokemon>(url);
     if (cached) {
-      console.log("Using cached data");
+      // console.log("Using cached data");
       return cached;
     }
 
-    // Make the network request
-    console.log("Fetching from API...");
+    // console.log("Fetching from API...");
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -83,7 +75,6 @@ export class PokeAPI {
     const data = await response.json();
     const pokemon = data as Pokemon;
 
-    // Add to cache
     this.#cache.add(url, pokemon);
 
     return pokemon;
