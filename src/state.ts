@@ -26,17 +26,14 @@ export type State = {
 };
 
 export function initState(): State {
-  // Create the readline interface
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
     prompt: "> ",
   });
 
-  // Create cache with 5 minute interval (300000 ms)
   const cache = new Cache(300000);
 
-  // Create the commands registry
   const commands: Record<string, CLICommand> = {
     help: {
       name: "help",
