@@ -1,30 +1,30 @@
 {
-	"name": "typescriptpokedex",
-	"version": "1.0.0",
-	"description": "This is the [Build a Pokedex in TypeScript project](https://www.boot.dev/lessons/002241a8-2fa9-44c9-a4d9-03bf6ef3a9bb) from [Boot.dev](https://www.boot.dev).",
-	"main": "index.js",
-	"type": "module",
-	"scripts": {
-		"test": "vitest --run",
-		"build": "npx tsc",
-		"start": "node dist/main.js",
-		"dev": "npx tsc && node dist/main.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/mmert9008/typescriptPokedex.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/mmert9008/typescriptPokedex/issues"
-	},
-	"homepage": "https://github.com/mmert9008/typescriptPokedex#readme",
-	"devDependencies": {
-		"@types/node": "^24.9.2",
-		"typescript": "^5.9.3",
-		"vite": "^7.1.12",
-		"vitest": "^4.0.4"
-	}
+  "name": "typescriptpokedex",
+  "version": "1.0.0",
+  "description": "This is the [Build a Pokedex in TypeScript project](https://www.boot.dev/lessons/002241a8-2fa9-44c9-a4d9-03bf6ef3a9bb) from [Boot.dev](https://www.boot.dev).",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest --run",
+    "build": "npx tsc",
+    "start": "node dist/main.js",
+    "dev": "npx tsc && node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmert9008/typescriptPokedex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmert9008/typescriptPokedex/issues"
+  },
+  "homepage": "https://github.com/mmert9008/typescriptPokedex#readme",
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vitest": "^4.0.4"
+  }
 }
